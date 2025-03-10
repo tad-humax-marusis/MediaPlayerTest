@@ -278,6 +278,22 @@ public class TestFunction {
             }
         };
     }
+
+    public AdapterView.OnItemSelectedListener onDropdown_getRVCGearList() {
+        return new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selected_item = parentView.getSelectedItem().toString();
+                String str = "rvc_gear_value=" + selected_item;
+                TestAudioManagerController.getInstance().audioSetParameters(str);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        };
+    }
     public View.OnClickListener onClick_ApplyNewMediaAtt() {
         return new View.OnClickListener() {
             @Override

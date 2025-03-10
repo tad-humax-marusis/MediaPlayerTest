@@ -2,9 +2,13 @@ package com.marusys.evo.component;
 
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.marusys.evo.audiotest.R;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 /***{@docRoot}
@@ -12,7 +16,8 @@ import java.util.HashMap;
  */
 public class TestInfomation {
     private final HashMap<String, Integer> mMediaTrackMap = new HashMap<String, Integer>();
-    private static TestInfomation mInstance;
+    private static TestInfomation mInstance = null;
+    private final static String TAG = common.AppInfo.OWNER + "[TestInfomation]";
 
     private final String[] mMediaAttUsageList = {
             "USAGE_UNKNOWN",
@@ -61,7 +66,21 @@ public class TestInfomation {
     public static TestInfomation getInstance() {
         if(null == mInstance) {
             mInstance = new TestInfomation();
-            mAudioAttributesBuilder = new AudioAttributes.Builder();
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("android.car.media.AUDIOFOCUS_EXTRA_REQUEST_ZONE_ID", 1);
+            Log.d(TAG, "AudioAttributesBuilder start set Bundle and ID Zone!");
+            try {
+                mAudioAttributesBuilder = new AudioAttributes.Builder();
+                mAudioAttributesBuilder.setUsage(AudioAttributes.USAGE_MEDIA);
+                Method addBundleMethod = mAudioAttributesBuilder.getClass().getDeclaredMethod("addBundle", Bundle.class);
+                addBundleMethod.setAccessible(true); // Make the method accessible
+                // Populate your bundle as needed
+                addBundleMethod.invoke(mAudioAttributesBuilder, bundle);
+                Log.d(TAG, "AudioAttributesBuilder set Bundle suggest!");
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException  e) {
+                Log.d(TAG, "AudioAttributesBuilder set Bundle fail! e: " + e.toString());
+            }
         }
         return mInstance;
     }
@@ -82,6 +101,9 @@ public class TestInfomation {
     }
     public String[] getUPAObstacleZoneList() {
         return new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
+    }
+    public String[] getRVCGearList() {
+        return new String[] { "0", "1", "2" };
     }
     public int getMediaFileRawId(String media_key) {
         Integer value = mMediaTrackMap.get(media_key);
@@ -169,6 +191,21 @@ public class TestInfomation {
     }
 
     public AudioAttributes getSelectAudioAttributes() {
+        Log.d(TAG, "Create new Bundle!");
+        Bundle bundle = new Bundle();
+        bundle.putInt("android.car.media.AUDIOFOCUS_EXTRA_REQUEST_ZONE_ID", 1);
+        Log.d(TAG, "AudioAttributesBuilder start set Bundle and ID Zone!");
+        try {
+            mAudioAttributesBuilder = new AudioAttributes.Builder();
+            mAudioAttributesBuilder.setUsage(AudioAttributes.USAGE_MEDIA);
+            Method addBundleMethod = mAudioAttributesBuilder.getClass().getDeclaredMethod("addBundle", Bundle.class);
+            addBundleMethod.setAccessible(true); // Make the method accessible
+            // Populate your bundle as needed
+            addBundleMethod.invoke(mAudioAttributesBuilder, bundle);
+            Log.d(TAG, "AudioAttributesBuilder set Bundle suggest!");
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException  e) {
+            Log.d(TAG, "AudioAttributesBuilder set Bundle fail! e: " + e.toString());
+        }
         return mAudioAttributesBuilder.build();
     }
 }

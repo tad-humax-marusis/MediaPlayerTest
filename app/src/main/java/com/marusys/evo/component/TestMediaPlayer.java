@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.media.AudioAttributes;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -119,6 +120,7 @@ public class TestMediaPlayer implements MediaPlayer.OnCompletionListener, MediaP
     }
 
     public void Play() {
+        Log.d(TAG, "On Button [Play]");
         AssetFileDescriptor afd;
         try {
             afd = AppInfo.getInstance().getAppResource().openRawResourceFd(mPlayerComponent.raw_id);
@@ -172,6 +174,7 @@ public class TestMediaPlayer implements MediaPlayer.OnCompletionListener, MediaP
     }
 
     public void Stop() {
+        Log.d(TAG, "On Button [Stop]");
         try {
             mMediaPlayer.pause();
         } catch (IllegalStateException e) {

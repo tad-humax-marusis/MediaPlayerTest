@@ -336,73 +336,73 @@ public class MainActivity extends AppCompatActivity {
                 UiStyle.LAYOUT_STYLE_2
         );
 
-//        AddCheckBox(
-//                "Set Streamming Audio",
-//                TestFunction.getInstance().onTestStreamming(),
-//                UiStyle.STYLE_4,
-//                UiStyle.LAYOUT_STYLE_2);
-//
-//
-//        AddCheckBox(
-//                "Dump pcm audio input bluetooth hfp",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_PCM_BT_IN),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump pcm audio input mic",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_PCM_MIC_IN),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump pcm audio output mic (audio send to bt hfp phone)",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_PCM_MIC_OUT),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump radio input",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_PCM_RADIO_IN),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump all audio out awe (8 channels)",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_ALL_OUT),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump audio input awe stream media",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_STREAM_MEDIA),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump audio input awe stream media streaming",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_STREAM_STREAMING),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump audio input awe stream navigation",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_STREAM_NAVIGATION),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump audio input awe stream voice assistant",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_STREAM_VOICE_ASSISTANT),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump audio input awe stream incomming call",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_INCOMMING_CALL),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump audio input awe stream adas sound (no sound)",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_ADAS_SOUND),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
-//        AddCheckBox(
-//                "Dump audio input awe stream media out going call",
-//                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_OUTGOING_CALL),
-//                UiStyle.STYLE_0,
-//                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Set Streamming Audio",
+                TestFunction.getInstance().onTestStreamming(),
+                UiStyle.STYLE_4,
+                UiStyle.LAYOUT_STYLE_2);
+
+
+        AddCheckBox(
+                "Dump pcm audio input bluetooth hfp",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_PCM_BT_IN),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump pcm audio input mic",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_PCM_MIC_IN),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump pcm audio output mic (audio send to bt hfp phone)",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_PCM_MIC_OUT),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump radio input",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_PCM_RADIO_IN),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump all audio out awe (8 channels)",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_ALL_OUT),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump audio input awe stream media",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_STREAM_MEDIA),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump audio input awe stream media streaming",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_STREAM_STREAMING),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump audio input awe stream navigation",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_STREAM_NAVIGATION),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump audio input awe stream voice assistant",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_STREAM_VOICE_ASSISTANT),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump audio input awe stream incomming call",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_INCOMMING_CALL),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump audio input awe stream adas sound (no sound)",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_ADAS_SOUND),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
+        AddCheckBox(
+                "Dump audio input awe stream media out going call",
+                TestFunction.getInstance().onSetDumpMic(TestAudioManagerController.DUMP_AUDIO_AWE_IN_OUTGOING_CALL),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_0);
 
         AddTextView("Selection Audio Mode", UiStyle.STYLE_2, UiStyle.LAYOUT_STYLE_2);
 
@@ -430,12 +430,21 @@ public class MainActivity extends AppCompatActivity {
                 UiStyle.LAYOUT_STYLE_3
         );
 
-        AddTextView("I don't know what is this", UiStyle.STYLE_2, UiStyle.LAYOUT_STYLE_2);
-        AddCheckBox(
-                "System on off",
-                TestFunction.getInstance().onTestSystemOffByUser(),
-                UiStyle.STYLE_4,
-                UiStyle.LAYOUT_STYLE_2);
+//        AddTextView("I don't know what is this", UiStyle.STYLE_2, UiStyle.LAYOUT_STYLE_2);
+//        AddCheckBox(
+//                "System on off",
+//                TestFunction.getInstance().onTestSystemOffByUser(),
+//                UiStyle.STYLE_4,
+//                UiStyle.LAYOUT_STYLE_2);
+
+        AddTextView("Selects RVC Gear", UiStyle.STYLE_2, UiStyle.LAYOUT_STYLE_2);
+        AddDropDownBox(
+                TestInfomation.getInstance().getRVCGearList(),
+                TestFunction.getInstance().onDropdown_getRVCGearList(),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_3
+        );
+        AddTextView("Blank", UiStyle.STYLE_1, UiStyle.LAYOUT_STYLE_2);
     }
 }
 
