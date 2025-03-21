@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.util.Log;
 
 public class CommandReceiver extends BroadcastReceiver {
-    public final String TAG = "TAD-ZEILA";
+    public final String TAG = common.AppInfo.OWNER + "CommandReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         // Do some thing
         Log.d(TAG, "Received message:" + intent.getAction().toString());
         String msg = intent.getAction().toString();
-        MainActivity.getInstance().onHandleBroadcast(msg);
+        MainActivity.getInstance().onHandleBroadcast(intent);
     }
 }

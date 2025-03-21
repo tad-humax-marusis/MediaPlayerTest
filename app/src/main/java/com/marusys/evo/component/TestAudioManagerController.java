@@ -121,7 +121,7 @@ public class TestAudioManagerController {
         } else {
             mMicSetDump = mMicSetDump&(~mic_dump_value);
         }
-        String array = "dump_audio_mic=" + Integer.toString(mMicSetDump);
+        String array = "dump_audio=" + Integer.toString(mMicSetDump);
         Log.d(TAG, array);
         mAudioManager.setParameters(array);
     };

@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.app.NotificationManager;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
@@ -32,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private final String TAG = AppInfo.OWNER + "[MainActivity]";
     private SurfaceView mSurfaceView;
     private static MainActivity mInstance;
+    private static CommandReceiver mCommandReceiver = new CommandReceiver();
+    private String mUsbMountPoint;
 
     public static MainActivity getInstance() {
         return mInstance;
@@ -40,6 +45,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        IntentFilter filter = new IntentFilter(Intent.ACTION_MEDIA_MOUNTED);
+//        filter.addDataScheme("file");
+//        registerReceiver(mCommandReceiver, filter);
+        IntentFilter filter_1 = new IntentFilter(Intent.ACTION_MEDIA_MOUNTED);
+        filter_1.addDataScheme("file");
+        IntentFilter filter_2 = new IntentFilter(Intent.ACTION_MEDIA_UNMOUNTED);
+        filter_2.addDataScheme("file");
+        registerReceiver(mCommandReceiver, filter_1);
+        registerReceiver(mCommandReceiver, filter_2);
+
         mInstance = this;
         setContentView(R.layout.activity_main);
         common.AppInfo.getInstance().setApplicationContext(getApplicationContext());
@@ -172,8 +188,8 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    public void onHandleBroadcast(String msg) {
-        switch (msg) {
+    public void onHandleBroadcast(Intent intent) {
+        switch (intent.getAction().toString()) {
             case "PLAY_MUSIC":
                 TestMediaPlayer.getInstance().Stop();
                 TestAudioManagerController.getInstance().setStreamType("STREAM_MUSIC");
@@ -252,10 +268,10 @@ public class MainActivity extends AppCompatActivity {
         // Drop Down Box for select media test file
 
         AddDropDownBox(
-                TestInfomation.getInstance().getTrackList(),
-                TestFunction.getInstance().onDropdownMediaSelected(),
-                UiStyle.STYLE_0,
-                UiStyle.LAYOUT_STYLE_3
+            TestInfomation.getInstance().getTrackList(),
+            TestFunction.getInstance().onDropdownMediaSelected(),
+            UiStyle.STYLE_0,
+            UiStyle.LAYOUT_STYLE_3
         );
 
         AddButton(
