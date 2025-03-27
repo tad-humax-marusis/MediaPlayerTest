@@ -129,7 +129,9 @@ public class TestAudioManagerController {
         mAudioManager.setParameters(array);
     };
 
-    public void requestFocusAudio(AudioAttributes attr, AudioManager.OnAudioFocusChangeListener focusChangeCallback, Handler handler) {
+    int requestFocusAudio(AudioAttributes attr, AudioManager.OnAudioFocusChangeListener focusChangeCallback, Handler handler) {
+        Log.d(TAG, "AudioAttributes :" + attr.toString());
+
         AudioFocusRequest focusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
                 .setAudioAttributes(attr)
                 .setAcceptsDelayedFocusGain(true)
@@ -138,12 +140,13 @@ public class TestAudioManagerController {
 
         int res = mAudioManager.requestAudioFocus(focusRequest);
         switch (res) {
-            case AudioManager.AUDIOFOCUS_REQUEST_FAILED:
-            case AudioManager.AUDIOFOCUS_REQUEST_GRANTED:
-            case AudioManager.AUDIOFOCUS_REQUEST_DELAYED:
+            case AudioManager.AUDIOFOCUS_REQUEST_FAILED:  Log.d(TAG, "requestAudioFocus res : AUDIOFOCUS_REQUEST_FAILED"); break;
+            case AudioManager.AUDIOFOCUS_REQUEST_GRANTED: Log.d(TAG, "requestAudioFocus res : AUDIOFOCUS_REQUEST_GRANTED"); break;
+            case AudioManager.AUDIOFOCUS_REQUEST_DELAYED: Log.d(TAG, "requestAudioFocus res : AUDIOFOCUS_REQUEST_DELAYED"); break;
             default:
                 Log.d(TAG, "res : " + res);
                 break;
         }
+        return res;
     };
 }

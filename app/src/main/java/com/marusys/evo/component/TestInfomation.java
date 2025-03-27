@@ -66,21 +66,7 @@ public class TestInfomation {
     public static TestInfomation getInstance() {
         if(null == mInstance) {
             mInstance = new TestInfomation();
-
-            Bundle bundle = new Bundle();
-            bundle.putInt("android.car.media.AUDIOFOCUS_EXTRA_REQUEST_ZONE_ID", 1);
-            Log.d(TAG, "AudioAttributesBuilder start set Bundle and ID Zone!");
-            try {
-                mAudioAttributesBuilder = new AudioAttributes.Builder();
-                mAudioAttributesBuilder.setUsage(AudioAttributes.USAGE_MEDIA);
-                Method addBundleMethod = mAudioAttributesBuilder.getClass().getDeclaredMethod("addBundle", Bundle.class);
-                addBundleMethod.setAccessible(true); // Make the method accessible
-                // Populate your bundle as needed
-                addBundleMethod.invoke(mAudioAttributesBuilder, bundle);
-                Log.d(TAG, "AudioAttributesBuilder set Bundle suggest!");
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException  e) {
-                Log.d(TAG, "AudioAttributesBuilder set Bundle fail! e: " + e.toString());
-            }
+            mAudioAttributesBuilder = new AudioAttributes.Builder();
         }
         return mInstance;
     }
@@ -196,8 +182,6 @@ public class TestInfomation {
         bundle.putInt("android.car.media.AUDIOFOCUS_EXTRA_REQUEST_ZONE_ID", 1);
         Log.d(TAG, "AudioAttributesBuilder start set Bundle and ID Zone!");
         try {
-            mAudioAttributesBuilder = new AudioAttributes.Builder();
-            mAudioAttributesBuilder.setUsage(AudioAttributes.USAGE_MEDIA);
             Method addBundleMethod = mAudioAttributesBuilder.getClass().getDeclaredMethod("addBundle", Bundle.class);
             addBundleMethod.setAccessible(true); // Make the method accessible
             // Populate your bundle as needed
