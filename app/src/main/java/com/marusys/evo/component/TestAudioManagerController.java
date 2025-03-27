@@ -1,6 +1,8 @@
 package com.marusys.evo.component;
 
 import android.content.Context;
+import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
 import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.TextView;
+import android.os.Handler;
 
 import java.util.HashMap;
 
@@ -126,4 +129,21 @@ public class TestAudioManagerController {
         mAudioManager.setParameters(array);
     };
 
+    public void requestFocusAudio(AudioAttributes attr, AudioManager.OnAudioFocusChangeListener focusChangeCallback, Handler handler) {
+        AudioFocusRequest focusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+                .setAudioAttributes(attr)
+                .setAcceptsDelayedFocusGain(true)
+                .setOnAudioFocusChangeListener(focusChangeCallback, handler)
+                .build();
+
+        int res = mAudioManager.requestAudioFocus(focusRequest);
+        switch (res) {
+            case AudioManager.AUDIOFOCUS_REQUEST_FAILED:
+            case AudioManager.AUDIOFOCUS_REQUEST_GRANTED:
+            case AudioManager.AUDIOFOCUS_REQUEST_DELAYED:
+            default:
+                Log.d(TAG, "res : " + res);
+                break;
+        }
+    };
 }

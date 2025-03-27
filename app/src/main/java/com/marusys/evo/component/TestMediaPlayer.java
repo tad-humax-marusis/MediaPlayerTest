@@ -3,9 +3,14 @@ package com.marusys.evo.component;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
+import android.media.AudioManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -182,11 +187,46 @@ public class TestMediaPlayer implements MediaPlayer.OnCompletionListener, MediaP
         }
     }
 
+    private AudioManager.OnAudioFocusChangeListener onAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            switch (focusChange) {
+                case AudioManager.AUDIOFOCUS_GAIN:
+                    Toast.makeText(AppInfo.getInstance().getApplicationContext(), "AUDIOFOCUS_GAIN", Toast.LENGTH_LONG).show();
+                    Play();
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS:
+                    Toast.makeText(AppInfo.getInstance().getApplicationContext(), "AUDIOFOCUS_LOSS", Toast.LENGTH_LONG).show();
+                    Stop();
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                    Toast.makeText(AppInfo.getInstance().getApplicationContext(), "AUDIOFOCUS_LOSS_TRANSIENT", Toast.LENGTH_LONG).show();
+                    Pause();
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                    Toast.makeText(AppInfo.getInstance().getApplicationContext(), "AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK", Toast.LENGTH_LONG).show();
+                    break;
+                default:
+                    Toast.makeText(AppInfo.getInstance().getApplicationContext(), "unknown", Toast.LENGTH_LONG).show();
+                    Stop();
+                    break;
+            }
+        }
+    };
+
+    private class TempHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            // do  nothing
+        }
+    };
+
     public void applyAttribute() {
+        Handler handler = new Handler(Looper.getMainLooper());
         try {
             mAudioAttributes = TestInfomation.getInstance().getSelectAudioAttributes();
+            TestAudioManagerController.getInstance().requestFocusAudio(mAudioAttributes, onAudioFocusChangeListener, handler);
             mMediaPlayer.reset();
-            Play();
         } catch (IllegalArgumentException e) {
             Log.d(TAG, "applyAttribute: " + e.toString());
         }
