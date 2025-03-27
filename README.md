@@ -1,4 +1,5 @@
 # audio-app-test
-Audio App test for EVO and KAMA
 
-I have no new update for this more on the future
+Audio App test for KAMA
+
+- No key set so it can not running as the system application
