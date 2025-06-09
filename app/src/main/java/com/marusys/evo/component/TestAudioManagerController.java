@@ -129,10 +129,24 @@ public class TestAudioManagerController {
         mAudioManager.setParameters(array);
     };
 
-    int requestFocusAudio(AudioAttributes attr, AudioManager.OnAudioFocusChangeListener focusChangeCallback, Handler handler) {
+    int requestFocusAudio(int audioFocus, AudioAttributes attr, AudioManager.OnAudioFocusChangeListener focusChangeCallback, Handler handler) {
         Log.d(TAG, "AudioAttributes :" + attr.toString());
 
-        AudioFocusRequest focusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+        switch (audioFocus) {
+            case AudioManager.AUDIOFOCUS_NONE:
+            case AudioManager.AUDIOFOCUS_GAIN:
+            case AudioManager.AUDIOFOCUS_GAIN_TRANSIENT:
+            case AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK:
+            case AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE:
+            case AudioManager.AUDIOFOCUS_LOSS:
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                break;
+            default:
+                audioFocus = AudioManager.AUDIOFOCUS_GAIN;
+        }
+
+        AudioFocusRequest focusRequest = new AudioFocusRequest.Builder(audioFocus)
                 .setAudioAttributes(attr)
                 .setAcceptsDelayedFocusGain(true)
                 .setOnAudioFocusChangeListener(focusChangeCallback, handler)

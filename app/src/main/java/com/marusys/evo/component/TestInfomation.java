@@ -18,6 +18,8 @@ public class TestInfomation {
     private final HashMap<String, Integer> mMediaTrackMap = new HashMap<String, Integer>();
     private static TestInfomation mInstance = null;
     private final static String TAG = common.AppInfo.OWNER + "[TestInfomation]";
+    private static AudioAttributes.Builder mAudioAttributesBuilder; // User selection value
+    private static int mAudioFocusValue = AudioManager.AUDIOFOCUS_GAIN;
 
     private final String[] mMediaAttUsageList = {
             "USAGE_UNKNOWN",
@@ -25,6 +27,7 @@ public class TestInfomation {
             "USAGE_VOICE_COMMUNICATION",
             "USAGE_VOICE_COMMUNICATION_SIGNALLING",
             "USAGE_ALARM",
+            "USAGE_NOTIFICATION",
             "USAGE_NOTIFICATION_RINGTONE",
             "USAGE_NOTIFICATION_COMMUNICATION_REQUEST",
             "USAGE_NOTIFICATION_COMMUNICATION_INSTANT",
@@ -54,7 +57,16 @@ public class TestInfomation {
         "YANDEX"
     };
 
-    private static AudioAttributes.Builder mAudioAttributesBuilder; // User selection value
+    private final String[] mAudioFocus = {
+            "AUDIOFOCUS_NONE",
+            "AUDIOFOCUS_GAIN",
+            "AUDIOFOCUS_GAIN_TRANSIENT",
+            "AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK",
+            "AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE",
+            "AUDIOFOCUS_LOSS",
+            "AUDIOFOCUS_LOSS_TRANSIENT",
+            "AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK"
+    };
 
     private TestInfomation() {
         mMediaTrackMap.put("sinway 1kHz 1 channel (long)", R.raw.sinway_1k_1ch_long);
@@ -74,22 +86,24 @@ public class TestInfomation {
     public String[] getTrackList() {
         return mMediaTrackMap.keySet().toArray(new String[0]);
     }
-
     public String[] getMediaAttUsageList() {
         return mMediaAttUsageList;
     }
-
     public String[] getMediaAttContentList() {
         return mMediaAttContentList;
     }
     public String[] getEntModeList() {
         return mEntModeList;
     }
+    public String[] getAudioFocusList() {
+        return mAudioFocus;
+    }
+
     public String[] getUPAObstacleZoneList() {
         return new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
     }
     public String[] getRVCGearList() {
-        return new String[] { "0", "1", "2" };
+        return new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8" };
     }
     public int getMediaFileRawId(String media_key) {
         Integer value = mMediaTrackMap.get(media_key);
@@ -116,6 +130,9 @@ public class TestInfomation {
                 break;
             case "USAGE_ALARM":
                 mAudioAttributesBuilder.setUsage(AudioAttributes.USAGE_ALARM);
+                break;
+            case "USAGE_NOTIFICATION":
+                mAudioAttributesBuilder.setUsage(AudioAttributes.USAGE_NOTIFICATION);
                 break;
             case "USAGE_NOTIFICATION_RINGTONE":
                 mAudioAttributesBuilder.setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE);
@@ -176,6 +193,38 @@ public class TestInfomation {
         }
     }
 
+    public void setAudioFocus(String audio_focus_name) {
+        switch (audio_focus_name) {
+            case "AUDIOFOCUS_NONE":
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_NONE;
+                break;
+            case "AUDIOFOCUS_GAIN":
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_GAIN;
+                break;
+            case "AUDIOFOCUS_GAIN_TRANSIENT":
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_GAIN_TRANSIENT;
+                break;
+            case "AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK":
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK;
+                break;
+            case "AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE":
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE;
+                break;
+            case "AUDIOFOCUS_LOSS":
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_LOSS;
+                break;
+            case "AUDIOFOCUS_LOSS_TRANSIENT":
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
+                break;
+            case "AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK":
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
+                break;
+            default:
+                mAudioFocusValue = AudioManager.AUDIOFOCUS_GAIN;
+                break;
+        }
+    }
+
     public AudioAttributes getSelectAudioAttributes() {
         Log.d(TAG, "Create new Bundle!");
         Bundle bundle = new Bundle();
@@ -191,5 +240,9 @@ public class TestInfomation {
             Log.d(TAG, "AudioAttributesBuilder set Bundle fail! e: " + e.toString());
         }
         return mAudioAttributesBuilder.build();
+    }
+
+    public int getAudioFocus() {
+        return mAudioFocusValue;
     }
 }

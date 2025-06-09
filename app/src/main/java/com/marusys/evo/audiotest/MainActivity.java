@@ -345,6 +345,15 @@ public class MainActivity extends AppCompatActivity {
                 UiStyle.LAYOUT_STYLE_3
         );
 
+        AddTextView("Select request audio focus", UiStyle.STYLE_1, UiStyle.LAYOUT_STYLE_1);
+
+        AddDropDownBox(
+                TestInfomation.getInstance().getAudioFocusList(),
+                TestFunction.getInstance().onDropdown_getAudioFocusList(),
+                UiStyle.STYLE_0,
+                UiStyle.LAYOUT_STYLE_3
+        );
+
         AddButton(
                 "Apply Selection",
                 TestFunction.getInstance().onClick_ApplyNewMediaAtt(),
@@ -445,6 +454,12 @@ public class MainActivity extends AppCompatActivity {
                 UiStyle.STYLE_0,
                 UiStyle.LAYOUT_STYLE_3
         );
+
+        AddCheckBox(
+                "Set Continuous Tone",
+                TestFunction.getInstance().onTestUAPTone(),
+                UiStyle.STYLE_4,
+                UiStyle.LAYOUT_STYLE_2);
 
 //        AddTextView("I don't know what is this", UiStyle.STYLE_2, UiStyle.LAYOUT_STYLE_2);
 //        AddCheckBox(

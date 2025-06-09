@@ -104,6 +104,16 @@ public class TestFunction {
         };
     }
 
+    public CompoundButton.OnCheckedChangeListener onTestUAPTone() {
+        return new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String str = "upa_audio_continuous_tone=" + (isChecked?"true":"false");
+                TestAudioManagerController.getInstance().audioSetParameters(str);
+            }
+        };
+    }
+
     public CompoundButton.OnCheckedChangeListener onTestSystemOffByUser() {
         return new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -238,6 +248,21 @@ public class TestFunction {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String selected_item = parentView.getSelectedItem().toString();
                 TestInfomation.getInstance().selAttContentValue(selected_item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
+            }
+        };
+    }
+
+    public AdapterView.OnItemSelectedListener onDropdown_getAudioFocusList() {
+        return new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String selected_item = parentView.getSelectedItem().toString();
+                TestInfomation.getInstance().setAudioFocus(selected_item);
             }
 
             @Override

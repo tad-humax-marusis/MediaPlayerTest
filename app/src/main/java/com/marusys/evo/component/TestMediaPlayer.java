@@ -32,6 +32,7 @@ public class TestMediaPlayer implements MediaPlayer.OnCompletionListener, MediaP
     private MediaPlayer mMediaPlayer;
     private MediaMetadataRetriever mMediaMetadataRetriever; // For claim media data
     private AudioAttributes mAudioAttributes = null;
+    private int mAudioFocus = 0;
 
     private static TestMediaPlayer mInstance = null;
     public static TestMediaPlayer getInstance() {
@@ -70,10 +71,10 @@ public class TestMediaPlayer implements MediaPlayer.OnCompletionListener, MediaP
     private PlaybackTimerTask mPlaybackTimerTask = null;
 
     /**
-     * Override method for Surface View and Media Player call back funtion
-     * .. TO DO ...
-     * .. TO DO ...
-     * .. TO DO ...
+      * Override method for Surface View and Media Player call back funtion
+      * .. TO DO ...
+      * .. TO DO ...
+      * .. TO DO ...
      */
 
     @Override
@@ -223,8 +224,9 @@ public class TestMediaPlayer implements MediaPlayer.OnCompletionListener, MediaP
         Handler handler = new Handler(Looper.getMainLooper());
         try {
             mAudioAttributes = TestInfomation.getInstance().getSelectAudioAttributes();
+            mAudioFocus = TestInfomation.getInstance().getAudioFocus();
             Log.d(TAG, "applyAttribute: " + mAudioAttributes.toString());
-            int res = TestAudioManagerController.getInstance().requestFocusAudio(mAudioAttributes, onAudioFocusChangeListener, handler);
+            int res = TestAudioManagerController.getInstance().requestFocusAudio(mAudioFocus, mAudioAttributes, onAudioFocusChangeListener, handler);
             mMediaPlayer.reset();
             if(AudioManager.AUDIOFOCUS_REQUEST_GRANTED == res) Play();
         } catch (IllegalArgumentException e) {
